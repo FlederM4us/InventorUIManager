@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Run Inventor": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Autodesk\\Inventor 2026\\Bin\\Inventor.exe"
+    }
+  }
+}

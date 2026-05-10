@@ -1,0 +1,14 @@
+<Addin Type="Standard">
+  <!--Created for Autodesk Inventor Version 30.0-->
+  <ClassId>{cb5cebd9-4b11-4e9f-b47a-132ca2cf4926}</ClassId>
+  <ClientId>{cb5cebd9-4b11-4e9f-b47a-132ca2cf4926}</ClientId>
+  <DisplayName>InventorUIToolsSamples</DisplayName>
+  <Description>InventorUIToolsSamples</Description>
+  <Assembly>InventorUIToolsSamples.dll</Assembly>
+  <LoadOnStartUp>1</LoadOnStartUp>
+  <UserUnloadable>1</UserUnloadable>
+  <Hidden>0</Hidden>
+  <SupportedSoftwareVersionGreaterThan>29..</SupportedSoftwareVersionGreaterThan>
+  <DataVersion>1</DataVersion>
+  <UserInterfaceVersion>1</UserInterfaceVersion>
+</Addin>
