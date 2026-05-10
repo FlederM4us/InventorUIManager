@@ -1,0 +1,14 @@
+<Addin Type="Standard">
+  <!--Created for Autodesk Inventor Version 30.0-->
+  <ClassId>{e2d77621-8ee9-486c-b8de-cf86024f6906}</ClassId>
+  <ClientId>{e2d77621-8ee9-486c-b8de-cf86024f6906}</ClientId>
+  <DisplayName>FM: Inventor UI Tools (NuGet package test)</DisplayName>
+  <Description>This addin need to checking how FlederM4us.Inventor.UI.Tools NuGet package works.</Description>
+  <Assembly>NuGetPackageTest.dll</Assembly>
+  <LoadOnStartUp>1</LoadOnStartUp>
+  <UserUnloadable>1</UserUnloadable>
+  <Hidden>0</Hidden>
+  <SupportedSoftwareVersionGreaterThan>29..</SupportedSoftwareVersionGreaterThan>
+  <DataVersion>1</DataVersion>
+  <UserInterfaceVersion>1</UserInterfaceVersion>
+</Addin>
