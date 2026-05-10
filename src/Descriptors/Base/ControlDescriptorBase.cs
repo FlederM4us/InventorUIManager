@@ -31,7 +31,7 @@ namespace InventorUITools
 		/// <summary>
 		/// Gets the internal name used for the control definition.
 		/// </summary>
-		public virtual string InternalName => $"id_{DisplayName}Definion";
+		public virtual string InternalName => $"id_{DisplayName.Replace(" ", "")}Definion";
 		/// <summary>
 		/// Gets or sets the command type for the control.
 		/// </summary>
