@@ -1,4 +1,14 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="tests/NuGetPackageTest/NuGetPackageTest.csproj" />
+  </Folder>
   <Project Path="samples/InventorUIToolsSamples.csproj" Id="181f6084-2081-4c90-a6f1-c34c20a3ec70" />
   <Project Path="src\InventorUITools.csproj" />
 </Solution>
