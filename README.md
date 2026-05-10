@@ -1,4 +1,4 @@
-# InventorUITools
+# InventorUI.Manager
 
 A comprehensive .NET 8 library for building and managing custom user interface elements in Autodesk Inventor through the Inventor API. This project provides a fluent, builder-pattern-based approach to create ribbon buttons, toggle popups, and other UI controls with simplified setup and lifecycle management.
 
@@ -17,7 +17,7 @@ A comprehensive .NET 8 library for building and managing custom user interface e
 
 ## Overview
 
-InventorUITools simplifies the creation and management of custom UI controls in Autodesk Inventor. Instead of directly working with the complex Inventor API, developers can use an intuitive builder pattern to define buttons, toggle popups, and other ribbon controls with minimal boilerplate code.
+InventorUI.Manager simplifies the creation and management of custom UI controls in Autodesk Inventor. Instead of directly working with the complex Inventor API, developers can use an intuitive builder pattern to define buttons, toggle popups, and other ribbon controls with minimal boilerplate code.
 
 ### Key Benefits
 
@@ -51,16 +51,19 @@ InventorUITools simplifies the creation and management of custom UI controls in 
 - **.NET Framework**: .NET 8.0 (Windows)
 - **Autodesk Inventor**: 2026 or compatible
 - **Autodesk Inventor Interop Assembly**: `Autodesk.Inventor.Interop.dll`
-- **Windows Forms**: For UI control management
 
 ## Installation
 
 1. Clone or download this project to your local machine.
 2. Open the project in Visual Studio 2022 or later.
 3. Ensure the Autodesk Inventor 2026 interop assembly reference is correctly configured:
-   ```
-   C:\Program Files\Autodesk\Inventor 2026\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll
-   ```
+```xml
+<Reference Include="Autodesk.Inventor.Interop">
+  <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Autodesk.Inventor.Interop.dll</HintPath>
+  <EmbedInteropTypes>False</EmbedInteropTypes>
+  <Private>True</Private>
+</Reference>
+```
 4. Build the project using `dotnet build` or Visual Studio.
 
 ## Quick Start
@@ -68,42 +71,56 @@ InventorUITools simplifies the creation and management of custom UI controls in 
 ### 1. Initialize the UIManager
 
 ```csharp
-using InventorUITools;
-using Inventor;
+using FlederM4us.InventorUI.Manager;
+using System;
+using System.Runtime.InteropServices;
 
-// Get the Inventor application instance
-Application ivApp = GetInventorApplication();
+namespace Samples
+{
+	[Guid("your_GUID")]
+	public class StandardAddInServer : Inventor.ApplicationAddInServer, IUIManager
+	{
+		private Inventor.Application _ivApplication;
+		private UIManager _uiManager;
 
-// Create a UIManager instance
-var uiManager = new UIManager(ivApp, "com.example.myapp");
+		public StandardAddInServer() { }
+
+		public void Activate(Inventor.ApplicationAddInSite addInSiteObject, bool firstTime)
+		{
+			_ivApplication = addInSiteObject.Application;
+			_uiManager = new UIManager(_ivApplication, addInSiteObject.Parent.ClientId);
+		}
+
+		public void Deactivate()
+		{
+			_ivApplication = null;
+
+			GC.Collect();
+			GC.WaitForPendingFinalizers();
+		}
+
+		public void ExecuteCommand(int commandID) { }
+
+		public object Automation => null;
+
+		public UIManager UIManager => _uiManager;
+	}
+}
 ```
 
 ### 2. Create a Ribbon Button
 
 ```csharp
 // Create and configure a ribbon button using the builder pattern
-uiManager.NewRibbonButton()
-	.WithDisplayName("My Custom Button")
-	.WithDescription("This is my custom button")
-	.WithClientId("cmd.mybutton")
-	.OnExecuted(button => {
-		// Handle button click
-		MessageBox.Show("Button clicked!");
-	})
-	.AddToRibbonTabPanel(
-		ribbons: new List<RibbonName> { RibbonName.PartRibbon },
-		tabName: "Automation",
-		panelName: "Custom"
-	)
-	.Build();
+UIManager.NewRibbonButton()
+	.WithLabel("My Custom Button")
+	.WithTooltip("This is my custom button")
+	.WithIcon(Properties.Resources.Update)
+	.OnExecute((c) => MessageBox.Show("My Custom Button Handler"))
+	.AddToRibbonTabPanel([RibbonName.ZeroDoc, RibbonName.Part, RibbonName.Assembly, RibbonName.Drawing], "My Tab", "My Panel")
+	.Initialize();
 ```
 
-### 3. Initialize UI Controls
-
-```csharp
-// Initialize all registered UI controls
-uiManager.Initialize();
-```
 
 ## Architecture
 
@@ -117,24 +134,24 @@ uiManager.Initialize();
 
 #### Builder Pattern Classes
 
+- **ButtonDescriptorBuilderBase**: Base fluent builder with common functionality
 - **RibbonButtonBuilder**: Fluent builder for ribbon buttons
-- **ButtonDescriptorBuilder**: Builder for button descriptors
-- **RibbonTogglePopupBuilder**: Builder for toggle popup menus
-- **ToogleItemBuilder**: Builder for toggle items
-- **ButtonDescriptorBuilderBase**: Base builder with common functionality
+- **ButtonDescriptorBuilder**: Fluent builder for button descriptors
+- **RibbonTogglePopupBuilder**: Fluent builder for toggle popup menus
+- **ToogleItemBuilder**: Fluent builder for toggle items
 
 #### Control Classes
 
-- **RibbonButton**: Wraps ButtonDescriptor and manages ribbon button lifecycle
+- **UIControlBase**: Base class for all UI controls
 - **RibbonControlBase**: Base class for all ribbon controls
+- **RibbonButton**: Wraps ButtonDescriptor and manages ribbon button lifecycle
 - **RibbonTogglePopup**: Manages toggle popup controls
 - **ToogleItem**: Represents a single item in a toggle popup
-- **UIControlBase**: Base class for all UI controls
 
 #### Descriptor Classes
 
-- **ButtonDescriptor**: Wraps Inventor's ButtonDefinition with lifecycle management
 - **ControlDescriptorBase**: Base class for control descriptors
+- **ButtonDescriptor**: Wraps Inventor's ButtonDefinition with lifecycle management
 - **ComboBoxDescriptor**: Descriptor for combo box controls
 
 #### Interfaces
@@ -151,94 +168,12 @@ uiManager.Initialize();
 
 ## Usage Examples
 
-### Example 1: Simple Button with Click Handler
-
-```csharp
-var uiManager = new UIManager(ivApp, "com.example.app");
-
-uiManager.NewRibbonButton()
-	.WithDisplayName("Analyze")
-	.WithDescription("Analyze selected geometry")
-	.WithClientId("cmd.analyze")
-	.OnExecuted(button => {
-		// Perform analysis
-	})
-	.AddToRibbonTabPanel()
-	.Build();
-
-uiManager.Initialize();
-```
-
-### Example 2: Multiple Buttons on Custom Tab
-
-```csharp
-var uiManager = new UIManager(ivApp, "com.example.modeling");
-
-// Create a custom ribbon tab
-uiManager.NewRibbonButton()
-	.WithDisplayName("Export")
-	.WithClientId("cmd.export")
-	.OnExecuted(button => {
-		// Handle export
-	})
-	.AddToRibbonTabPanel(
-		ribbons: new List<RibbonName> { 
-			RibbonName.PartRibbon, 
-			RibbonName.AssemblyRibbon 
-		},
-		tabName: "Custom Tools",
-		panelName: "Export"
-	)
-	.Build();
-
-uiManager.NewRibbonButton()
-	.WithDisplayName("Import")
-	.WithClientId("cmd.import")
-	.OnExecuted(button => {
-		// Handle import
-	})
-	.AddToRibbonTabPanel(
-		ribbons: new List<RibbonName> { 
-			RibbonName.PartRibbon, 
-			RibbonName.AssemblyRibbon 
-		},
-		tabName: "Custom Tools",
-		panelName: "Export"
-	)
-	.Build();
-
-uiManager.Initialize();
-```
-
-### Example 3: Toggle Popup Menu
-
-```csharp
-var togglePopup = uiManager.NewRibbonTogglePopup()
-	.WithDisplayName("Options")
-	.WithClientId("cmd.options")
-	.AddToRibbonTabPanel()
-	.Build();
-
-// Add items to the toggle popup
-var item1 = uiManager.NewToggleItem()
-	.WithDisplayName("Option 1")
-	.OnExecuted(item => {
-		// Handle option 1
-	})
-	.Build();
-
-var item2 = uiManager.NewToggleItem()
-	.WithDisplayName("Option 2")
-	.OnExecuted(item => {
-		// Handle option 2
-	})
-	.Build();
-```
+Working on it.
 
 ## Project Structure
 
 ```
-InventorUITools/
+src/
 ├── Builders/
 │   ├── Base/
 │   │   ├── ButtonDescriptorBuilderBase.cs
@@ -260,14 +195,9 @@ InventorUITools/
 │   │   └── ControlDescriptorBase.cs
 │   ├── ButtonDescriptor.cs
 │   └── ComboBoxDescriptor.cs
-├── Properties/
-│   ├── Resources.resx
-│   └── Resources.Designer.cs
-├── Resources/
-│   └── images.png
-├── IUserInterfaceManager.cs
+├── IUIManager.cs
 ├── UIManager.cs
-└── InventorUITools.csproj
+└── InventorUIManager.csproj
 ```
 
 ### Directory Breakdown
@@ -284,9 +214,6 @@ InventorUITools/
   - `Base`: Abstract base class for descriptors
   - Individual descriptor implementations
 
-- **Properties**: Generated resource files and designers
-
-- **Resources**: Image and icon assets for UI controls
 
 ## Contributing
 
