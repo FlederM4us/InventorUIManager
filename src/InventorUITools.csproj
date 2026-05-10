@@ -29,30 +29,5 @@
     <Authors>FlederM4us</Authors>
     <Description>Library providing a fluent API for building and managing custom Inventor ribbon controls and UI elements with minimal boilerplate.</Description>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <None Remove="Resources\images.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Resources\images.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
 
 </Project>
