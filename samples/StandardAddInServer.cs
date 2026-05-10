@@ -1,12 +1,14 @@
+using InventorUITools;
 using System;
 using System.Runtime.InteropServices;
 
 namespace InventorUIToolsSamples
 {
 	[Guid("cb5cebd9-4b11-4e9f-b47a-132ca2cf4926")]
-	public class StandardAddInServer : Inventor.ApplicationAddInServer
+	public class StandardAddInServer : Inventor.ApplicationAddInServer, IUserInterfaceManager
 	{
-		private Inventor.Application ivApplication;
+		private Inventor.Application _ivApplication;
+		private UIManager _uiManager;
 
 		public StandardAddInServer()
 		{
@@ -16,12 +18,15 @@ namespace InventorUIToolsSamples
 
 		public void Activate(Inventor.ApplicationAddInSite addInSiteObject, bool firstTime)
 		{
-			ivApplication = addInSiteObject.Application;
+			_ivApplication = addInSiteObject.Application;
+			_uiManager = new UIManager(_ivApplication, addInSiteObject.Parent.ClientId);
+
+			CreateSamples();
 		}
 
 		public void Deactivate()
 		{
-			ivApplication = null;
+			_ivApplication = null;
 
 			GC.Collect();
 			GC.WaitForPendingFinalizers();
@@ -35,7 +40,23 @@ namespace InventorUIToolsSamples
 
 		public object Automation => null;
 
+		public UIManager UIManager => _uiManager;
+
 		#endregion
 
+		private void CreateSamples()
+		{
+			_uiManager.NewRibbonButton()
+				.WithLabel("Update Button")
+				.OnExecute(UpdateSamples)
+				.AddToRibbonTabPanel([RibbonName.ZeroDoc, RibbonName.Part, RibbonName.Assembly, RibbonName.Drawing], "UI Tools Samples", "Control Buttons")
+				.Initialize();
+
+			UpdateSamples(null);
+		}
+		private void UpdateSamples(Inventor.NameValueMap context)
+		{
+			RibbonButtonSamples.UseBuilderSample(_uiManager);
+		}
 	}
 }
