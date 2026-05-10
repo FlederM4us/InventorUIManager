@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Provides a fluent API for building and configuring <see cref="RibbonTooglePopup"/> controls and placing them on specific ribbons, tabs, and panels in Inventor.

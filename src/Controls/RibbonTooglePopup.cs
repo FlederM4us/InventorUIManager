@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Represents a ribbon toggle popup control in Inventor, allowing a group of buttons to be displayed in a popup menu.

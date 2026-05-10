@@ -1,7 +1,7 @@
 ﻿using Inventor;
 using System;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Provides a fluent API for building and configuring <see cref="ToogleItem"/> instances.

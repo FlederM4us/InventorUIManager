@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Provides a base class for custom Inventor UI controls, managing their lifecycle and properties.

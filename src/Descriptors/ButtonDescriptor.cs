@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Represents a descriptor (ButtonDefinition) for an Inventor button control, providing access to its definition and events.

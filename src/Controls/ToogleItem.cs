@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Represents a toggleable item that wraps a <see cref="ButtonDescriptor"/> and provides checked/unchecked state management.

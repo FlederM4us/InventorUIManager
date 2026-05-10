@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Represents a ribbon button control in Inventor, wrapping a <see cref="ButtonDescriptor"/> and managing its lifecycle and events.

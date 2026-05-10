@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Defines a contract for fluent builders that support specifying ribbon placement for UI controls in Inventor.

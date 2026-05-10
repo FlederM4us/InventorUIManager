@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Provides a fluent API base for building and configuring UI controls.

@@ -1,7 +1,7 @@
 ﻿using Inventor;
 using System.Drawing;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Provides a fluent API base for building and configuring <see cref="ButtonDescriptor"/> instances.

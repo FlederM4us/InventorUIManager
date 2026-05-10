@@ -1,6 +1,6 @@
 ﻿using Inventor;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Provides a fluent API for building and configuring <see cref="ButtonDescriptor"/> instances.

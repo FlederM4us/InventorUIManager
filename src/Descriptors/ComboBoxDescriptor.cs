@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	public class ComboBoxDescriptor : ControlDescriptorBase
 	{

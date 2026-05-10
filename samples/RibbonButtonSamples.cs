@@ -1,11 +1,12 @@
-﻿using InventorUITools;
+﻿using FlederM4us.InventorUI.Manager;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace InventorUIToolsSamples
+namespace Samples
 {
 	internal static class RibbonButtonSamples
 	{
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
 		private static readonly List<RibbonName> RIBBONS = [RibbonName.ZeroDoc, RibbonName.Part, RibbonName.Assembly, RibbonName.Drawing];
 		private const string RIBBON_TAB = "UI Tools Samples";
 		private const string RIBBON_PANEL = "Ribbon Buttons";

@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	/// <summary>
 	/// Provides a base class for custom ribbon controls in Inventor, handling ribbon, tab, and panel creation and insertion.

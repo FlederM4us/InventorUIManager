@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\InventorUITools.csproj" />
+    <ProjectReference Include="..\src\InventorUIManager.csproj" />
     <Reference Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Autodesk.Inventor.Interop.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>

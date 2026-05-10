@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace InventorUITools
+namespace FlederM4us.InventorUI.Manager
 {
 	public class UIManager
 	{
