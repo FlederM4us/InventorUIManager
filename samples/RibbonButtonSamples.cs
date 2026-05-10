@@ -13,7 +13,7 @@ namespace InventorUIToolsSamples
 		{
 			uiManager.NewRibbonButton()
 				.WithLabel("Builder Button")
-				.WithTooltip("This button was created with the builder (fluent) !")
+				.WithTooltip("This button was created with the builder (fluent) pattern!")
 				.OnExecute((context) => MessageBox.Show("Fluent Button Example"))
 				.AddToRibbonTabPanel(RIBBONS, RIBBON_TAB, RIBBON_PANEL)
 				.Initialize();

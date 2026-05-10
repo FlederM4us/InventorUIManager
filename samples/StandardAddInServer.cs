@@ -48,6 +48,8 @@ namespace InventorUIToolsSamples
 		{
 			_uiManager.NewRibbonButton()
 				.WithLabel("Update Button")
+				.WithLabel("Update all samples")
+				.WithIcon(Properties.Resources.Update)
 				.OnExecute(UpdateSamples)
 				.AddToRibbonTabPanel([RibbonName.ZeroDoc, RibbonName.Part, RibbonName.Assembly, RibbonName.Drawing], "UI Tools Samples", "Control Buttons")
 				.Initialize();
