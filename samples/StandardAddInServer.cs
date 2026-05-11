@@ -10,9 +10,7 @@ namespace Samples
 		private Inventor.Application _ivApplication;
 		private UIManager _uiManager;
 
-		public StandardAddInServer()
-		{
-		}
+		public StandardAddInServer() { }
 
 		#region ApplicationAddInServer Members
 
@@ -46,7 +44,7 @@ namespace Samples
 
 		private void CreateSamples()
 		{
-			_uiManager.NewRibbonButton()
+			UIManager.NewRibbonButton()
 				.WithLabel("Update Button")
 				.WithLabel("Update all samples")
 				.WithIcon(Properties.Resources.Update)
@@ -58,7 +56,7 @@ namespace Samples
 		}
 		private void UpdateSamples(Inventor.NameValueMap context)
 		{
-			RibbonButtonSamples.UseBuilderSample(_uiManager);
+			RibbonButtonSamples.UseBuilderSample(UIManager);
 		}
 	}
 }
