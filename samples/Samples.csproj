@@ -11,10 +11,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <None Include="Autodesk.InventorUIToolsSamples.Inventor.addin" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\src\InventorUIManager.csproj" />
     <Reference Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Autodesk.Inventor.Interop.dll</HintPath>
@@ -37,5 +33,4 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  
 </Project>
