@@ -15,6 +15,10 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="MinVer" Version="7.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>cd
+    </PackageReference>
     <Reference Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</HintPath>
       <Private>False</Private>
@@ -25,7 +29,6 @@
   <!--NuGet Package info-->
   <PropertyGroup>
     <PackageId>FlederM4us.InventorUI.Manager</PackageId>
-    <Version>1.0.0</Version>
     <Authors>FlederM4us</Authors>
     <Description>Library providing a fluent API for building and managing custom Inventor ribbon controls and UI elements with minimal boilerplate.</Description>
   </PropertyGroup>
