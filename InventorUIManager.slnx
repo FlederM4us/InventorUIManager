@@ -8,8 +8,8 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/Tests/">
-    <Project Path="tests/NuGetPackageTest/NuGetPackageTest.csproj" />
+    <Project Path="tests/InventorUIManager.SmokeTest/InventorUIManager.SmokeTest.csproj" />
   </Folder>
-  <Project Path="samples/Samples.csproj" Id="181f6084-2081-4c90-a6f1-c34c20a3ec70" />
+  <Project Path="samples/InventorUIManager.Samples.csproj" Id="181f6084-2081-4c90-a6f1-c34c20a3ec70" />
   <Project Path="src/InventorUIManager.csproj" />
 </Solution>
