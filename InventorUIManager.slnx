@@ -9,6 +9,7 @@
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="tests/InventorUIManager.SmokeTest/InventorUIManager.SmokeTest.csproj" />
+    <Project Path="tests/InventorUIManager.UnitTests/InventorUIManager.UnitTests.csproj" />
   </Folder>
   <Project Path="samples/InventorUIManager.Samples.csproj" Id="181f6084-2081-4c90-a6f1-c34c20a3ec70" />
   <Project Path="src/InventorUIManager.csproj" />
