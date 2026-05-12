@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using Xunit;
 using FlederM4us.InventorUI.Manager;
 using InventorUIManager.UnitTests.Fixtures;
+using System.Collections.Generic;
+using Xunit;
 
 namespace InventorUIManager.UnitTests.BuilderTests
 {

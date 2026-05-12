@@ -1,7 +1,7 @@
-using System.Windows.Forms;
-using Xunit;
 using FlederM4us.InventorUI.Manager;
 using InventorUIManager.UnitTests.Fixtures;
+using System.Windows.Forms;
+using Xunit;
 
 namespace InventorUIManager.UnitTests.UIManagerTests
 {

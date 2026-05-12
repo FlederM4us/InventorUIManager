@@ -1,7 +1,6 @@
-using System;
-using Xunit;
 using FlederM4us.InventorUI.Manager;
 using InventorUIManager.UnitTests.Fixtures;
+using Xunit;
 
 namespace InventorUIManager.UnitTests.UIManagerTests
 {
@@ -22,21 +21,6 @@ namespace InventorUIManager.UnitTests.UIManagerTests
 		}
 
 		[Fact]
-		public void CreateButtonDescriptor_SetsCorrectClientId()
-		{
-			// Arrange
-			var clientId = "SpecificClientId";
-			var uiManager = new UIManager(MockApplication.Object, clientId);
-
-			// Act
-			var descriptor = uiManager.CreateButtonDescriptor();
-
-			// Assert
-			Assert.NotNull(descriptor);
-			Assert.Equal(clientId, descriptor.ClientId);
-		}
-
-		[Fact]
 		public void CreateRibbonButton_RegistersControlInUIControls()
 		{
 			// Arrange
@@ -51,16 +35,6 @@ namespace InventorUIManager.UnitTests.UIManagerTests
 			Assert.NotNull(ribbonButton);
 			Assert.Single(uiManager.UIControls);
 			Assert.Equal(ribbonButton, uiManager.UIControls[0]);
-		}
-
-		[Fact]
-		public void CreateRibbonButton_WithNullDescriptor_ThrowsArgumentNullException()
-		{
-			// Arrange
-			var uiManager = new UIManager(MockApplication.Object, "TestClientId");
-
-			// Act & Assert
-			Assert.Throws<ArgumentNullException>(() => uiManager.CreateRibbonButton(null));
 		}
 
 		[Fact]

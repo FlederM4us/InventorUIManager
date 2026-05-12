@@ -11,7 +11,7 @@ namespace InventorUIManager.UnitTests.Fixtures
 
 		protected InventorTestBase()
 		{
-			MockApplication = MockInventorApplication.CreateApplicationMock();
+			MockApplication = MockInventorObjects.CreateApplicationMock();
 		}
 	}
 }

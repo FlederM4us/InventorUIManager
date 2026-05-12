@@ -1,4 +1,3 @@
-using System;
 using Moq;
 
 namespace InventorUIManager.UnitTests.Fixtures
@@ -6,7 +5,7 @@ namespace InventorUIManager.UnitTests.Fixtures
 	/// <summary>
 	/// Provides reusable mock fixtures for Inventor COM interop types.
 	/// </summary>
-	public static class MockInventorApplication
+	public static class MockInventorObjects
 	{
 		/// <summary>
 		/// Creates a mock Inventor.Application with configurable behavior.

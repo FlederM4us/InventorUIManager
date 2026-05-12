@@ -1,7 +1,6 @@
-using System;
-using Xunit;
 using FlederM4us.InventorUI.Manager;
 using InventorUIManager.UnitTests.Fixtures;
+using Xunit;
 
 namespace InventorUIManager.UnitTests.UIManagerTests
 {
