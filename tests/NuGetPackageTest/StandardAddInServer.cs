@@ -1,4 +1,4 @@
-using InventorUITools;
+using FlederM4us.InventorUI.Manager;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace NuGetPackageTest
 {
 	[Guid("e2d77621-8ee9-486c-b8de-cf86024f6906")]
-	public class StandardAddInServer : Inventor.ApplicationAddInServer, IUserInterfaceManager
+	public class StandardAddInServer : Inventor.ApplicationAddInServer, IUIManager
 	{
 		private Inventor.Application _ivApplication;
 		private UIManager _uiManager;

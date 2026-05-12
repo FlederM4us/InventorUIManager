@@ -15,7 +15,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="FlederM4us.Inventor.UI.Tools" Version="1.0.1" />
+    <PackageReference Include="FlederM4us.InventorUI.Manager" Version="0.0.0-preview.1" />
     <Reference Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Autodesk.Inventor.Interop.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
