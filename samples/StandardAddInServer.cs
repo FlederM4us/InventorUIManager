@@ -2,7 +2,7 @@ using FlederM4us.InventorUI.Manager;
 using System;
 using System.Runtime.InteropServices;
 
-namespace Samples
+namespace InventorUIManager.Samples
 {
 	[Guid("cb5cebd9-4b11-4e9f-b47a-132ca2cf4926")]
 	public class StandardAddInServer : Inventor.ApplicationAddInServer, IUIManager
