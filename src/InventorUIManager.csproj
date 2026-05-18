@@ -15,10 +15,11 @@
   
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.203" PrivateAssets="All" />
-    <PackageReference Include="MinVer" Version="7.0.0" PrivateAssets="All" >
+    <PackageReference Include="MinVer" Version="7.0.0" PrivateAssets="All">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <Reference Include="Autodesk.Inventor.Interop">
+    <PackageReference  Condition="'$(CI)' == 'true'" Include="FlederM4us.Inventor.Interop" Version="30.30.39800"/>
+    <Reference Condition="'$(CI)' != 'true'" Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</HintPath>
       <Private>False</Private>
       <EmbedInteropTypes>True</EmbedInteropTypes>
