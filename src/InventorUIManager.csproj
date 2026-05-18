@@ -28,9 +28,9 @@
   
   <!--MinVer Metadata-->
   <PropertyGroup>
-    <MinVerSkip Condition="'$(Configuration)' == 'Debug'">true</MinVerSkip>
     <MinVerTagPrefix>v</MinVerTagPrefix>
     <MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
+    <MinVerVerbosity>normal</MinVerVerbosity>
   </PropertyGroup>
   
   <!--NuGet Package Metadata-->
