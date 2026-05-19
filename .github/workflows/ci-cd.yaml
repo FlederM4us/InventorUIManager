@@ -17,6 +17,11 @@ on:
     types:
       - published
 
+permissions:
+  contents: read
+  id-token: write
+  packages: write
+
 env:
   NuGetDirectory: ${{ github.workspace }}/nuget
 
