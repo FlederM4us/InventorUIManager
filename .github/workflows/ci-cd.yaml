@@ -1,0 +1,96 @@
+name: CI/CD
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+  pull_request:
+    branches:
+      - main
+
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+  id-token: write
+  packages: write
+
+env:
+  NuGetDirectory: ${{ github.workspace }}/nuget
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Enable GitHub Packages Source
+        run: dotnet nuget enable source GitHub_FlederM4us
+
+      - name: Restore
+        run: dotnet restore
+        env:
+          GH_NUGET_AUTH_TOKEN: ${{ secrets.GH_NUGET_AUTH_TOKEN }}
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Upload package artifact
+        if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+        run: dotnet pack .\src\InventorUIManager.csproj -o ${{ env.NuGetDirectory }} -c Release --no-build
+      - uses: actions/upload-artifact@v4
+        if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+        with:
+          name: nuget-package
+          path: ${{ env.NuGetDirectory }}/*.nupkg
+
+  publish:
+    needs: build
+    runs-on: windows-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Download package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget-package
+          path: ${{ env.NuGetDirectory }}
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: NuGet Login
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Publish to NuGet.org
+        run: |
+          $fileName = (Get-ChildItem -Path ${{ env.NuGetDirectory }} -Recurse -Include *.nupkg | Select-Object -First 1).FullName
+          dotnet nuget push $fileName --source https://api.nuget.org/v3/index.json --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --skip-duplicate
