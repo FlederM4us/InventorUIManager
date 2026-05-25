@@ -5,6 +5,10 @@ using System.Windows.Forms;
 
 namespace FlederM4us.InventorUI.Manager
 {
+	/// <summary>
+	/// Manages UI controls and synchronization context for the Inventor add-in.
+	/// Responsible for creating and initializing ribbon controls and providing a synchronization context for marshaling UI operations.
+	/// </summary>
 	public class UIManager
 	{
 		private readonly string _clientId;
