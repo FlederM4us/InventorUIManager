@@ -11,7 +11,6 @@ A comprehensive .NET 8 library for building and managing custom user interface e
 - [Quick Start](#quick-start)
 - [Architecture](#architecture)
 - [Usage Examples](#usage-examples)
-- [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -48,15 +47,14 @@ InventorUI.Manager simplifies the creation and management of custom UI controls 
 
 ## Requirements
 
-- **.NET Framework**: .NET 8.0 (Windows)
-- **Autodesk Inventor**: 2026 or compatible
-- **Autodesk Inventor Interop Assembly**: `Autodesk.Inventor.Interop.dll`
+- **.NET 8.0 (Windows)**
+- **Autodesk Inventor 2025 or higher**
 
 ## Installation
 
-1. Clone or download this project to your local machine.
-2. Open the project in Visual Studio 2022 or later.
-3. Ensure the Autodesk Inventor 2026 interop assembly reference is correctly configured:
+1. Download NuGet package from [NuGet.org](https://www.nuget.org/packages/FlederM4us.InventorUI.Manager/#readme-body-tab) or use pre-built package manager in Visual Studio IDE.
+2. Open your Inventor addin project in Visual Studio.
+3. Ensure the Autodesk Inventor Interop assembly reference is correctly configured:
 ```xml
 <Reference Include="Autodesk.Inventor.Interop">
   <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Autodesk.Inventor.Interop.dll</HintPath>
@@ -169,50 +167,6 @@ UIManager.NewRibbonButton()
 ## Usage Examples
 
 Working on it.
-
-## Project Structure
-
-```
-src/
-├── Builders/
-│   ├── Base/
-│   │   ├── ButtonDescriptorBuilderBase.cs
-│   │   ├── ControlBuilderBase.cs
-│   │   └── IRibbonPlacing.cs
-│   ├── ButtonDescriptorBuilder.cs
-│   ├── RibbonButtonBuilder.cs
-│   ├── RibbonTogglePopupBuilder.cs
-│   └── ToogleItemBuilder.cs
-├── Controls/
-│   ├── Base/
-│   │   ├── RibbonControlBase.cs
-│   │   └── UIControlBase.cs
-│   ├── RibbonButton.cs
-│   ├── RibbonTogglePopup.cs
-│   └── ToogleItem.cs
-├── Descriptors/
-│   ├── Base/
-│   │   └── ControlDescriptorBase.cs
-│   ├── ButtonDescriptor.cs
-│   └── ComboBoxDescriptor.cs
-├── IUIManager.cs
-├── UIManager.cs
-└── InventorUIManager.csproj
-```
-
-### Directory Breakdown
-
-- **Builders**: Contains builder classes for fluent UI control creation
-  - `Base`: Abstract base classes and interfaces for builders
-  - Individual builders for specific control types
-
-- **Controls**: Contains wrapper classes for UI controls
-  - `Base`: Abstract base classes for all controls
-  - Individual control implementations
-
-- **Descriptors**: Contains descriptor classes that define UI control properties
-  - `Base`: Abstract base class for descriptors
-  - Individual descriptor implementations
 
 
 ## Contributing
