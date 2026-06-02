@@ -6,13 +6,14 @@ param (
 	[string]$githubToken = [System.Environment]::GetEnvironmentVariable("GH_NUGET_AUTH_TOKEN")
 )
 
+$ErrorActionPreference = "Stop"
+
 if ([string]::IsNullOrEmpty($githubUsername)) {
 	Write-Host -Object "GitHub account name not found in evnvironment varible!" -ForegroundColor Yellow
 	$githubUsername = Read-Host -Prompt "Enter your GitHub account name"
 
 	if ([string]::IsNullOrEmpty($githubUsername)) {
 		Write-Error -Message "Script canceled: GitHub account name missing!"
-		exit 1
 	}
 }
 
@@ -22,7 +23,6 @@ if ([string]::IsNullOrEmpty($githubToken)) {
 
 	if ([string]::IsNullOrEmpty($githubToken)) {
 		Write-Error -Message "Script canceled: Authorization token missing!"
-		exit 1
 	}
 }
 
@@ -32,16 +32,13 @@ $inventorDll = "C:\Program Files\Autodesk\Inventor $inventorVersion\Bin\Autodesk
 $inventorTlb = "C:\Program Files\Autodesk\Inventor $inventorVersion\Bin\RxInventor.tlb"
 
 if (-not (Test-Path -Path $tlbimpExe)) { 
-	Write-Error -Message "Tlbimp.exe not found: $tlbimpExe" 
-	exit 1 
+	Write-Error -Message "Tlbimp.exe not found: $tlbimpExe"
 }
 if (-not (Test-Path -Path $inventorDll)) { 
-	Write-Error -Message "Inventor DLL not found: $inventorDll" 
-	exit 1 
+	Write-Error -Message "Inventor DLL not found: $inventorDll"
 }
 if (-not (Test-Path -Path $inventorTlb)) { 
-	Write-Error -Message "Inventor TLB not found: $inventorTlb" 
-	exit 1 
+	Write-Error -Message "Inventor TLB not found: $inventorTlb"
 }
 
 $versionInfo = (Get-Item -Path $inventorDll).VersionInfo
@@ -55,8 +52,15 @@ $stagingDir = Join-Path -Path $nugetOutputFolder -ChildPath "$packageId.Staging"
 $libDir = Join-Path -Path $stagingDir -ChildPath "lib\net8.0"
 $outputDllPath = Join-Path -Path $libDir -ChildPath $outputDllName
 
-if (Test-Path $stagingDir) { Remove-Item $stagingDir -Recurse -Force }
+if (Test-Path -Path $stagingDir) { 
+	Remove-Item -Path $stagingDir -Recurse -Force 
+}
 New-Item -ItemType Directory -Path $libDir -Force | Out-Null
+
+if (Test-Path -Path $nugetOutputFolder) {
+	Remove-Item -Path $nugetOutputFolder -Recurse -Force
+}
+New-Item -ItemType Directory -Path $nugetOutputFolder -Force | Out-Null
 
 Write-Host -Object "Generating interop assembly..." -ForegroundColor Green
 & $tlbimpExe $inventorTlb `
@@ -65,8 +69,7 @@ Write-Host -Object "Generating interop assembly..." -ForegroundColor Green
   /asmversion:$assemblyVersion `
 
 if (-not (Test-Path -Path $outputDllPath)) { 
-	Write-Error -Message "Failed to generate interop assembly." 
-	exit 1 
+	Write-Error -Message "Failed to generate interop assembly."
 }
 
 Write-Host -Object "Generating .nuspec file..." -ForegroundColor Green
@@ -98,3 +101,5 @@ Write-Host -Object "Pushing package to GitHub Packages..." -ForegroundColor Gree
 $githubSource = "https://nuget.pkg.github.com/$githubUsername/index.json"
 $nupkgFile = Get-ChildItem -Path $nugetOutputFolder -Filter "*.nupkg" | Select-Object -First 1
 & dotnet nuget push $nupkgFile.FullName --source $githubSource --api-key $githubToken --skip-duplicate
+
+Remove-Item -Path $nugetOutputFolder -Recurse -Force

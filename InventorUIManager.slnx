@@ -8,6 +8,7 @@
     <File Path="nuget.config" />
     <File Path="Publish-InventorInterop.ps1.ps1" />
     <File Path="README.md" />
+    <File Path="scripts/Publish-NuGet.ps1" />
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="tests/InventorUIManager.SmokeTest/InventorUIManager.SmokeTest.csproj" />
