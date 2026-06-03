@@ -21,8 +21,8 @@
     </PackageReference>
     <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
-    
-    <PackageReference Condition="'$(CI)' == 'true'" Include="FlederM4us.Inventor.Interop" Version="*" PrivateAssets="All"/>
+
+    <PackageReference Condition="'$(CI)' == 'true'" Include="Autodesk.Inventor.Interop" Version="*" PrivateAssets="All"/>
     <Reference Condition="'$(CI)' != 'true'" Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</HintPath>
       <Private>true</Private>

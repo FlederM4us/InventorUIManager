@@ -45,7 +45,7 @@ $versionInfo = (Get-Item -Path $inventorDll).VersionInfo
 $assemblyVersion = $versionInfo.FileVersion
 Write-Host -Object "Detected Inventor FileVersion: $assemblyVersion" -ForegroundColor Cyan
 
-$packageId = "FlederM4us.Inventor.Interop"
+$packageId = "Autodesk.Inventor.Interop"
 $outputDllName = "$packageId.dll"
 $nugetOutputFolder = Join-Path -Path $PSScriptRoot -ChildPath "output"
 $stagingDir = Join-Path -Path $nugetOutputFolder -ChildPath "$packageId.Staging"
