@@ -28,7 +28,7 @@ if ([string]::IsNullOrEmpty($githubToken)) {
 
 $inventorVersion = 2026
 $tlbimpExe = "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\tlbimp.exe"
-$inventorDll = "C:\Program Files\Autodesk\Inventor $inventorVersion\Bin\Autodesk.Inventor.Interop.dll"
+$inventorDll = "C:\Program Files\Autodesk\Inventor $inventorVersion\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll"
 $inventorTlb = "C:\Program Files\Autodesk\Inventor $inventorVersion\Bin\RxInventor.tlb"
 
 if (-not (Test-Path -Path $tlbimpExe)) { 
@@ -52,25 +52,23 @@ $stagingDir = Join-Path -Path $nugetOutputFolder -ChildPath "$packageId.Staging"
 $libDir = Join-Path -Path $stagingDir -ChildPath "lib\net8.0"
 $outputDllPath = Join-Path -Path $libDir -ChildPath $outputDllName
 
-if (Test-Path -Path $stagingDir) { 
-	Remove-Item -Path $stagingDir -Recurse -Force 
-}
-New-Item -ItemType Directory -Path $libDir -Force | Out-Null
-
 if (Test-Path -Path $nugetOutputFolder) {
 	Remove-Item -Path $nugetOutputFolder -Recurse -Force
 }
 New-Item -ItemType Directory -Path $nugetOutputFolder -Force | Out-Null
+New-Item -ItemType Directory -Path $libDir -Force | Out-Null
 
 Write-Host -Object "Generating interop assembly..." -ForegroundColor Green
-& $tlbimpExe $inventorTlb `
-  /out:$outputDllPath `
-  /namespace:Inventor `
-  /asmversion:$assemblyVersion `
+# & $tlbimpExe $inventorTlb `
+#   /out:$outputDllPath `
+#   /namespace:Inventor `
+#   /asmversion:$assemblyVersion `
 
-if (-not (Test-Path -Path $outputDllPath)) { 
-	Write-Error -Message "Failed to generate interop assembly."
-}
+# if (-not (Test-Path -Path $outputDllPath)) { 
+# 	Write-Error -Message "Failed to generate interop assembly."
+# }
+
+Copy-Item -Path $inventorDll -Destination $outputDllPath
 
 Write-Host -Object "Generating .nuspec file..." -ForegroundColor Green
 $nuspecName = "$packageId.nuspec"
