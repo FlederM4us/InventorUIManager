@@ -21,8 +21,7 @@
     <PackageReference Include="MinVer" Version="7.0.0" PrivateAssets="All">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Condition="'$(CI)' == 'true'" Include="FlederM4us.Inventor.Interop" Version="*" PrivateAssets="All"/>
-    <Reference Condition="'$(CI)' != 'true'" Include="Autodesk.Inventor.Interop">
+    <Reference Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</HintPath>
       <Private>False</Private>
     </Reference>
