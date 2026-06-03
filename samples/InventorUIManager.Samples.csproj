@@ -12,11 +12,10 @@
   
   <ItemGroup>
     <ProjectReference Include="..\src\InventorUIManager.csproj" />
-    <PackageReference  Condition="'$(CI)' == 'true'" Include="FlederM4us.Inventor.Interop" Version="30.30.39800"/>
+    <PackageReference  Condition="'$(CI)' == 'true'" Include="FlederM4us.Inventor.Interop" Version="*" PrivateAssets="All"/>
     <Reference Condition="'$(CI)' != 'true'" Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Autodesk.Inventor.Interop.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   
