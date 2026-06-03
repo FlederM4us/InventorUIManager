@@ -44,6 +44,9 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Disable LocalFeed Packages Source
+        run: dotnet nuget disable source local
+
       - name: Enable GitHub Packages Source
         run: dotnet nuget enable source GitHub_FlederM4us
 

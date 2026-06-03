@@ -11,8 +11,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="FlederM4us.InventorUI.Manager" Version="*" />
-    <PackageReference Condition="'$(CI)' == 'true'" Include="FlederM4us.Inventor.Interop" Version="*" PrivateAssets="All"/>
+    <PackageReference Include="FlederM4us.InventorUI.Manager" Version="1.0.4-preview.0.4" />
+    <PackageReference Condition="'$(CI)' == 'true'" Include="Autodesk.Inventor.Interop" Version="*" PrivateAssets="All" />
     <Reference Condition="'$(CI)' != 'true'" Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Autodesk.Inventor.Interop.dll</HintPath>
       <Private>False</Private>
