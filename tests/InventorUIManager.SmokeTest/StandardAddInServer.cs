@@ -3,7 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace NuGetPackageTest
+namespace InventorUIManager.SmokeTest
 {
 	[Guid("e2d77621-8ee9-486c-b8de-cf86024f6906")]
 	public class StandardAddInServer : Inventor.ApplicationAddInServer, IUIManager
