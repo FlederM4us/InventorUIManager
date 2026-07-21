@@ -11,11 +11,18 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="FlederM4us.InventorUI.Manager" Version="1.0.4-preview.0.4" />
+    <PackageReference Include="FlederM4us.InventorUI.Manager" Version="1.0.5-preview.0.1" />
     <PackageReference Condition="'$(CI)' == 'true'" Include="Autodesk.Inventor.Interop" Version="*" PrivateAssets="All" />
     <Reference Condition="'$(CI)' != 'true'" Include="Autodesk.Inventor.Interop">
       <HintPath>C:\Program Files\Autodesk\Inventor 2026\Bin\Autodesk.Inventor.Interop.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+
+  <Target Name="CopyAddinFile" AfterTargets="Build">
+    <ItemGroup>
+      <AddinFile Include="$(MSBuildProjectDirectory)\*.addin" />
+    </ItemGroup>
+    <Copy SourceFiles="@(AddinFile)" DestinationFolder="$(OutDir)" />
+  </Target>
 </Project>
