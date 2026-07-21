@@ -1,5 +1,7 @@
 using FlederM4us.InventorUI.Manager;
+using Inventor;
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -25,7 +27,7 @@ namespace InventorUIManager.SmokeTest
 
 			UIManager.NewRibbonButton()
 				.WithLabel("Test")
-				.OnExecute((c) => MessageBox.Show("Test"))
+				.OnExecute(ShowVersion)
 				.AddToRibbonTabPanel([RibbonName.ZeroDoc, RibbonName.Part, RibbonName.Assembly, RibbonName.Drawing], "UI Tools Samples", "Control Buttons")
 				.Initialize();
 		}
@@ -49,6 +51,22 @@ namespace InventorUIManager.SmokeTest
 		public UIManager UIManager => _uiManager;
 
 		#endregion
+
+		private void ShowVersion(NameValueMap valueMap)
+		{
+			var assembly = typeof(UIManager).Assembly;
+			var assemblyLocation = assembly.Location;
+			var fileVersion = FileVersionInfo.GetVersionInfo(assemblyLocation).FileVersion;
+			var productVersion = FileVersionInfo.GetVersionInfo(assemblyLocation).ProductVersion;
+			var assemblyVersion = assembly.GetName().Version;
+
+			MessageBox.Show(
+				$"AssemblyLocation: {assemblyLocation}\n" +
+				$"AssemblyVersion: {assemblyVersion}\n" +
+				$"FileVersion: {fileVersion}\n" +
+				$"ProductVersion: {productVersion}"
+			);
+		}
 
 	}
 }
