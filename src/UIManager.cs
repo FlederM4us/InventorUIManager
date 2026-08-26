@@ -38,6 +38,7 @@ namespace FlederM4us.InventorUI.Manager
 			// SynchronizationContext.Current for the whole Inventor UI thread.
 			Context = new WindowsFormsSynchronizationContext();
 			InitializeReadyLifecycle();
+			UIManagerRegistry.Register(this, _clientId);
 		}
 
 		/// <summary>
@@ -160,6 +161,7 @@ namespace FlederM4us.InventorUI.Manager
 				_applicationEvents = null;
 			}
 
+			UIManagerRegistry.Unregister(this, _clientId);
 			UnsubscribeFromOnReady(applicationEvents);
 			GC.SuppressFinalize(this);
 		}
