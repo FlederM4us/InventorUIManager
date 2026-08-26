@@ -61,6 +61,22 @@ namespace InventorUIManager.UnitTests.UIManagerTests
 		}
 
 		[Fact]
+		public void RunWhenAvailable_QueuesReadyActionUntilOnReady()
+		{
+			var lifecycle = new ApplicationLifecycle(isReady: false);
+			var clientId = Guid.NewGuid().ToString();
+			int invocationCount = 0;
+
+			UIManagerRegistry.RunWhenAvailable(clientId,
+				uiManager => uiManager.RunWhenReady(() => invocationCount++));
+			using var uiManager = new UIManager(lifecycle.Application.Object, clientId);
+
+			lifecycle.RaiseOnReady();
+
+			Assert.Equal(1, invocationCount);
+		}
+
+		[Fact]
 		public void Dispose_UnsubscribesFromOnReadyAndRejectsNewActions()
 		{
 			// Arrange
