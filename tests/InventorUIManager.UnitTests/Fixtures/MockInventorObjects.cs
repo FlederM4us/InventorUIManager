@@ -12,7 +12,10 @@ namespace InventorUIManager.UnitTests.Fixtures
 		/// </summary>
 		public static Mock<Inventor.Application> CreateApplicationMock()
 		{
+			var mockApplicationEvents = new Mock<Inventor.ApplicationEvents>(MockBehavior.Loose);
 			var mockApp = new Mock<Inventor.Application>(MockBehavior.Loose);
+			mockApp.SetupGet(application => application.ApplicationEvents).Returns(mockApplicationEvents.Object);
+			mockApp.SetupGet(application => application.Ready).Returns(false);
 			return mockApp;
 		}
 

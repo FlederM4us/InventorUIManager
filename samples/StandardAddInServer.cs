@@ -24,6 +24,8 @@ namespace InventorUIManager.Samples
 
 		public void Deactivate()
 		{
+			_uiManager?.Dispose();
+			_uiManager = null;
 			_ivApplication = null;
 
 			GC.Collect();

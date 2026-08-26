@@ -1,5 +1,6 @@
 using FlederM4us.InventorUI.Manager;
 using InventorUIManager.UnitTests.Fixtures;
+using System.Threading;
 using System.Windows.Forms;
 using Xunit;
 
@@ -28,6 +29,19 @@ namespace InventorUIManager.UnitTests.UIManagerTests
 
 			// Assert
 			Assert.IsType<WindowsFormsSynchronizationContext>(uiManager.Context);
+		}
+
+		[Fact]
+		public void Constructor_DoesNotReplaceAmbientSynchronizationContext()
+		{
+			// Arrange
+			var ambientContext = SynchronizationContext.Current;
+
+			// Act
+			using var uiManager = new UIManager(MockApplication.Object, "TestClientId");
+
+			// Assert
+			Assert.Same(ambientContext, SynchronizationContext.Current);
 		}
 
 		[Fact]
