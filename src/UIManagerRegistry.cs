@@ -14,6 +14,19 @@ namespace FlederM4us.InventorUI.Manager
 		private static readonly Dictionary<string, List<Action<UIManager>>> _pendingActions = new(StringComparer.OrdinalIgnoreCase);
 
 		/// <summary>
+		/// Attempts to get the UI manager registered for the specified client identifier.
+		/// </summary>
+		/// <param name="clientId">The client identifier used to locate the UI manager.</param>
+		/// <param name="uIManager">
+		/// When this method returns <see langword="true"/>, contains the UI manager associated with the specified client identifier;
+		/// otherwise, <see langword="null"/>.
+		/// </param>
+		/// <returns>
+		/// <see langword="true"/> if a UI manager exists for the specified <paramref name="clientId"/>; otherwise, <see langword="false"/>.
+		/// </returns>
+		public static bool TryGetManager(string clientId, out UIManager uIManager) => _managers.TryGetValue(clientId, out uIManager);
+
+		/// <summary>
 		/// Runs an action when a UI manager for the specified Inventor client ID is available.
 		/// </summary>
 		/// <param name="clientId">The Inventor add-in client ID.</param>
